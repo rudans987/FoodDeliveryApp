@@ -1,3 +1,7 @@
+// action: state를 바꾸는 행위/동작
+// dispatch: 그 액션을 실제로 실행하는 함수
+// reducer: 액션이 실제로 실행되면 state를 바꾸는 로직
+
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
