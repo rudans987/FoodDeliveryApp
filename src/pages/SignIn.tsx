@@ -32,10 +32,10 @@ function SignIn({navigation}: SignInScreenProps) {
   const emailRef = useRef<TextInput | null>(null);
   const passwordRef = useRef<TextInput | null>(null);
 
-  const onChangeEmail = useCallback(text => {
+  const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());
   }, []);
-  const onChangePassword = useCallback(text => {
+  const onChangePassword = useCallback((text: string) => {
     setPassword(text.trim());
   }, []);
   const onSubmit = useCallback(async () => {
@@ -63,6 +63,7 @@ function SignIn({navigation}: SignInScreenProps) {
           accessToken: response.data.data.accessToken,
         }),
       );
+      //refreshToken은 EncryptedStorage로 안전하게 보관
       await EncryptedStorage.setItem(
         'refreshToken',
         response.data.data.refreshToken,
