@@ -4,21 +4,19 @@
 // data엔 반복할 대상
 // keyExtractor: 키를 넣는 props
 // renderItem: 렌더할 아이템함수
+// 반복대상이 되는 것은 컴포넌트를 따로 분리시켜라.
 
 import React, {useCallback} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
+import EachOrder from '../components/EachOrder';
 import {Order} from '../slices/order';
 import {RootState} from '../store/reducer';
 function Orders() {
   const orders = useSelector((state: RootState) => state.order.orders);
 
   const renderItem = useCallback(({item}: {item: Order}) => {
-    return (
-      <View>
-        <Text>{item.price}원</Text>
-      </View>
-    );
+    return <EachOrder item={item} />;
   }, []);
   return (
     <FlatList
