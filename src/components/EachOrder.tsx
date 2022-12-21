@@ -44,7 +44,7 @@ function EachOrder({item}: Props) {
   const onReject = useCallback(() => {
     dispatch(orderSlice.actions.rejectOrder(item.orderId));
   }, [dispatch, item]);
-  const {start, end} = item;
+  //   const {start, end} = item;
 
   const toggleDetail = useCallback(() => {
     showDetail(prevState => !prevState);
