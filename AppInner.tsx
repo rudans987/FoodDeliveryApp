@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -9,6 +9,7 @@ import SignIn from './src/pages/SignIn';
 import SignUp from './src/pages/SignUp';
 import {useSelector} from 'react-redux';
 import {RootState} from './src/store/reducer';
+import useSocket from './src/hooks/useSocket';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -27,6 +28,31 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppInner() {
   const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
+
+  const [socket, disconnect] = useSocket();
+
+  useEffect(() => {
+    const helloCallback = (data: any) => {
+      console.log(data);
+    };
+    if (socket && isLoggedIn) {
+      console.log(socket);
+      socket.emit('login', 'hello'); //소켓 보내기
+      socket.on('hello', helloCallback); //소켓 받기
+    }
+    return () => {
+      if (socket) {
+        socket.off('hello', helloCallback); //소켓 받는거 그만하기
+      }
+    };
+  }, [isLoggedIn, socket]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      console.log('!isLoggedIn', !isLoggedIn);
+      disconnect();
+    }
+  }, [isLoggedIn, disconnect]);
   return (
     <NavigationContainer>
       {isLoggedIn ? (
