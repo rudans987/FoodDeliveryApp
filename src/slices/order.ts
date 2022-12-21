@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-interface Order {
+export interface Order {
   orderId: string;
   start: {
     latitude: number;
