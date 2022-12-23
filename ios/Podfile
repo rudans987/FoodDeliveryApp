@@ -31,6 +31,9 @@ target 'FoodDeliveryApp' do
     # Pods for testing
   end
 
+  use_flipper!()
+  pod 'NMapsMap', '3.10.1'
+  
   post_install do |installer|
     react_native_post_install(
       installer,
