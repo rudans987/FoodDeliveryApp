@@ -8,6 +8,12 @@
 // Tab.Screen 쓸때 특정 스크린 간에 공통 속성이 있을 때나 children이 하나여야 된다는 에러 날때 Tab.Group태그로 묶어야 한다.
 
 //  Provider 바깥에서 useSelector를 못쓰기 때문에 AppInner로 따로 빼서 거기서 useSelector를 쓴다.
+
+// 빌드애러날때
+// cd android
+// ./gradlew clean
+// react-native --reset-cache
+
 import * as React from 'react';
 import {Provider} from 'react-redux';
 import AppInner from './AppInner';
