@@ -16,7 +16,9 @@ function Ing({navigation}: IngScreenProps) {
     latitude: number;
     longitude: number;
   } | null>(null);
-
+  //현재 위치 받아오는 함수
+  //getCurrentPosition대신 watchPosition쓸경우 내 위치가 바뀔때마다 위치를가져올수 있음
+  //watchPosition option(세번째 매개변수)으로 distanceFilter넣어주면 좋음
   useEffect(() => {
     Geolocation.getCurrentPosition(
       info => {
@@ -60,7 +62,7 @@ function Ing({navigation}: IngScreenProps) {
         }}>
         <NaverMapView
           style={{width: '100%', height: '100%'}}
-          zoomControl={false}
+          // zoomControl={false}
           center={{
             zoom: 10,
             tilt: 50,
